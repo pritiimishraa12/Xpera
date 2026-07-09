@@ -199,7 +199,7 @@ git clone https://github.com/pritiimishraa12/Xpera.git
 Navigate to the project.
 
 ```bash
-cd XPERA
+cd Xpera
 ```
 
 Install dependencies.
