@@ -255,7 +255,7 @@ VITE_RESEND_API_KEY=
 
 Experience XPERA through the live deployment and explore the complete source code below.
 
-**Live Demo:** https://your-vercel-url.vercel.app
+**Live Demo:** https://xperaa.vercel.app/
 
 **GitHub Repository:** https://github.com/pritiimishraa12/Xpera
 
