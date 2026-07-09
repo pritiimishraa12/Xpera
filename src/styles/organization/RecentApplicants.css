@@ -1,0 +1,64 @@
+/* ============================================================
+   RECENT APPLICANTS CARD
+   ============================================================ */
+
+/* The outer card wrapper uses Tailwind classes in JSX —
+   we add any missing structural overrides here */
+
+/* Table container */
+.recent-applicants-table-wrap {
+    overflow-x: auto;
+}
+
+/* Override global body color so table text stays dark on white card */
+.recent-applicant-row td,
+.recent-applicant-row th {
+    color: #334155;
+}
+
+/* ---- Status badge colours (used via Tailwind in JSX, kept here as fallback) ---- */
+
+/* Applied  — sky */
+.badge-applied {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+/* Shortlisted — emerald */
+.badge-shortlisted {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #dcfce7;
+    color: #15803d;
+}
+
+/* Interviewed — violet */
+.badge-interviewed {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .recent-applicants-table-wrap {
+        -webkit-overflow-scrolling: touch;
+    }
+}

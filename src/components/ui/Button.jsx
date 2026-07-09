@@ -1,4 +1,7 @@
-function Button({
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export default function Button({
   children,
   variant = "primary",
   type = "button",
@@ -9,17 +12,18 @@ function Button({
   disabled = false,
 }) {
   const base =
-    "inline-flex min-h-12 items-center justify-center rounded-lg px-6 text-sm font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d9f45a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071019]";
+    "inline-flex min-h-[44px] items-center justify-center rounded-xl px-6 text-[14.5px] font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#061019] active:scale-[0.98]";
 
   const variants = {
     primary:
-      "bg-[#d9f45a] text-[#09111a] shadow-[0_10px_32px_rgba(217,244,90,0.16)] hover:bg-[#e4fa7b] hover:-translate-y-0.5",
+      "bg-[#d9f45a] text-slate-900 shadow-sm hover:bg-[#c9f120] hover:shadow-[0_4px_20px_-4px_rgba(217,244,90,0.4)]",
     secondary:
-      "border border-white/25 bg-transparent text-white hover:border-white/45 hover:bg-white/[0.06]",
-    dark: "bg-[#071019] text-white hover:bg-[#111d28]",
+      "border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50",
+    dark: "bg-slate-900 text-white shadow-sm hover:bg-slate-800 hover:shadow-[0_4px_20px_-4px_rgba(15,23,42,0.3)]",
+    violet: "bg-violet-600 text-white shadow-sm hover:bg-violet-700 hover:shadow-[0_4px_20px_-4px_rgba(124,58,237,0.4)]"
   };
 
-  const classes = `${base} ${variants[variant]} ${className}`;
+  const classes = twMerge(clsx(base, variants[variant], className));
 
   if (href) {
     return (
@@ -29,20 +33,14 @@ function Button({
     );
   }
 
- return (
-  <button
-    type={type}
-    onClick={onClick}
-    disabled={loading || disabled}
-    className={`${classes} ${
-      loading || disabled
-        ? "cursor-not-allowed opacity-60"
-        : ""
-    }`}
-  >
-    {loading ? "Please wait..." : children}
-  </button>
-);
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={loading || disabled}
+      className={twMerge(clsx(classes, (loading || disabled) && "cursor-not-allowed opacity-60 active:scale-100 hover:shadow-none translate-y-0"))}
+    >
+      {loading ? "Please wait..." : children}
+    </button>
+  );
 }
-
-export default Button;

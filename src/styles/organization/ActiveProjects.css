@@ -1,0 +1,192 @@
+/* ============================================================
+   ACTIVE PROJECTS — CSS overrides / enhancements
+   (JSX uses Tailwind inline; this file complements)
+   ============================================================ */
+
+/* Card wrapper polish */
+.active-projects-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.03);
+    padding: 24px 28px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.active-projects-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+    border-color: rgba(226, 232, 240, 1);
+}
+
+/* Header row */
+.active-projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.active-projects-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 3px 0;
+}
+
+.active-projects-header p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.active-projects-view-all {
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.active-projects-view-all:hover {
+    color: #5b21b6;
+}
+
+/* Project row */
+.project-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid #f1f5f9;
+    transition: box-shadow 0.2s, background 0.2s;
+    margin-bottom: 10px;
+}
+
+.project-row:last-of-type {
+    margin-bottom: 0;
+}
+
+.project-row:hover {
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08);
+    background: #faf8ff;
+}
+
+.project-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #ede9fe;
+    color: #7c3aed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.project-info {
+    flex: 1;
+    min-width: 0;
+    margin-left: 12px;
+}
+
+.project-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-info p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+}
+
+.project-meta {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.project-meta span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    display: block;
+}
+
+.project-meta small {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.project-dots-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 18px;
+    padding: 4px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-left: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.project-dots-btn:hover {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* "View all" bottom link */
+.active-projects-footer-btn {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #ececec;
+    background: transparent;
+    border-radius: 14px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.active-projects-footer-btn:hover {
+    background: #f5f0ff;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .active-projects-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .project-info h4 {
+        font-size: 13px;
+    }
+}

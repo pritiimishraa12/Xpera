@@ -1,0 +1,151 @@
+/* ============================================================
+   UPCOMING INTERVIEWS CARD
+   ============================================================ */
+
+.upcoming-interviews-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.03);
+    padding: 24px 28px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.upcoming-interviews-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+    border-color: rgba(226, 232, 240, 1);
+}
+
+/* Header */
+.upcoming-interviews-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.upcoming-interviews-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 3px 0;
+}
+
+.upcoming-interviews-header p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.upcoming-view-all-btn {
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7c3aed;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.upcoming-view-all-btn:hover {
+    color: #5b21b6;
+}
+
+/* Interview row */
+.interview-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid #f1f5f9;
+    transition: box-shadow 0.2s, background 0.2s;
+    margin-bottom: 10px;
+}
+
+.interview-row:last-child {
+    margin-bottom: 0;
+}
+
+.interview-row:hover {
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08);
+    background: #faf8ff;
+}
+
+.interview-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.interview-info {
+    flex: 1;
+    min-width: 0;
+    margin-left: 12px;
+}
+
+.interview-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.interview-info p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Date / time block */
+.interview-datetime {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.interview-datetime span.interview-date {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.interview-datetime span.interview-time {
+    display: block;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .upcoming-interviews-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .interview-info h4 {
+        font-size: 13px;
+    }
+}

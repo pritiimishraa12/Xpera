@@ -1,7 +1,10 @@
 import { supabase } from "./supabase";
+import { sendWelcomeEmail } from "./email";
 
 /**
+ * ============================
  * Student Signup
+ * ============================
  */
 export async function signUpStudent({
   fullName,
@@ -9,7 +12,6 @@ export async function signUpStudent({
   email,
   password,
 }) {
-  // Create Auth User
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -17,7 +19,6 @@ export async function signUpStudent({
 
   if (error) throw error;
 
-  // Save Profile
   const { error: profileError } = await supabase
     .from("profiles")
     .insert({
@@ -31,14 +32,20 @@ export async function signUpStudent({
 
   if (profileError) throw profileError;
 
+  // Fire and forget welcome email
+  sendWelcomeEmail(email, fullName, "student").catch(console.error);
+
   return data.user;
 }
 
 /**
+ * ============================
  * Organization Signup
+ * ============================
  */
 export async function signUpOrganization({
   organizationName,
+  organizationType,
   email,
   password,
 }) {
@@ -55,6 +62,7 @@ export async function signUpOrganization({
       id: data.user.id,
       full_name: organizationName,
       organization_name: organizationName,
+      organization_type: organizationType,
       email,
       role: "organization",
       xp: 0,
@@ -62,18 +70,22 @@ export async function signUpOrganization({
 
   if (profileError) throw profileError;
 
+  // Fire and forget welcome email
+  sendWelcomeEmail(email, organizationName, "organization").catch(console.error);
+
   return data.user;
 }
 
 /**
+ * ============================
  * Login
+ * ============================
  */
 export async function login(email, password) {
-  const { data, error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
   if (error) throw error;
 
@@ -81,7 +93,9 @@ export async function login(email, password) {
 }
 
 /**
+ * ============================
  * Logout
+ * ============================
  */
 export async function logout() {
   const { error } = await supabase.auth.signOut();
@@ -90,7 +104,9 @@ export async function logout() {
 }
 
 /**
+ * ============================
  * Current User
+ * ============================
  */
 export async function getCurrentUser() {
   const {
@@ -98,4 +114,24 @@ export async function getCurrentUser() {
   } = await supabase.auth.getUser();
 
   return user;
+}
+
+/**
+ * ============================
+ * User Profile
+ * ============================
+ */
+export async function getUserProfile(userId) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userId);
+
+  console.log("User ID:", userId);
+  console.log("Profile Data:", data);
+  console.log("Profile Error:", error);
+
+  if (error) throw error;
+
+  return data[0];
 }

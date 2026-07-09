@@ -10,14 +10,14 @@ import {
 import { FiCode } from "react-icons/fi";
 
 export const heroContent = {
-  badge: "Empowering the next generation of doers",
+  badge: "Real Experience. Verified Skills.",
   title1: "Doesn’t require",
   title2: "experience.",
   highlight: "Helps you become experienced.",
   description:
-    "Real-world projects. Verified skills. AI guidance. Everything you need to build your career.",
-  primaryButton: "I’m a Student",
-  secondaryButton: "I want to Post a Project",
+    "XPERA connects students with companies to build real-world, verified projects. Gain practical experience, earn XP, and become interview-ready before landing your first internship.",
+  primaryButton: "Start Building for Free",
+  secondaryButton: "View Companies",
 };
 
 export const benefits = [

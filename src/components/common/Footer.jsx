@@ -21,8 +21,8 @@ function FooterLogo() {
 
 function Footer() {
   return (
-    <footer id="footer" className="bg-[#061019] text-slate-400">
-      <div className="mx-auto max-w-[1320px] px-5 py-12 sm:px-8">
+    <footer id="footer" className="bg-[#050C12] text-slate-400">
+      <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 lg:px-12">
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr] lg:grid-cols-[1fr_2.2fr]">
           <div>
             <FooterLogo />
@@ -54,9 +54,9 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col justify-between gap-4 border-t border-white/[0.08] pt-6 text-xs sm:flex-row">
-          <p>© 2026 Xpera. All rights reserved.</p>
-          <div className="flex gap-6"><a href="#privacy">Privacy Policy</a><a href="#terms">Terms of Service</a></div>
+        <div className="mt-12 flex flex-col justify-between gap-4 border-t border-white/[0.08] pt-8 text-[13px] sm:flex-row">
+          <p>© 2026 Xpera Inc. All rights reserved.</p>
+          <div className="flex gap-6"><a href="#privacy" className="hover:text-white transition">Privacy Policy</a><a href="#terms" className="hover:text-white transition">Terms of Service</a></div>
         </div>
       </div>
     </footer>

@@ -44,3 +44,69 @@ button {
   color: #071019;
   background: #d9f45a;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+::selection {
+  background: #7c3aed;
+  color: white;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+}
+
+button {
+  transition: all .25s ease;
+}
+/* Sidebar Scrollbar */
+
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: #d9f45a;
+  border-radius: 20px;
+}
+
+aside {
+  scrollbar-width: thin;
+}
+
+aside::-webkit-scrollbar{
+    width:6px;
+}
+
+aside::-webkit-scrollbar-thumb{
+    background:#d9f45a;
+    border-radius:20px;
+}
+
+aside::-webkit-scrollbar-track{
+    background:transparent;
+}
+

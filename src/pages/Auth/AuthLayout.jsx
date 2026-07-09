@@ -73,26 +73,47 @@ export function FormField({
         value={value}
         onChange={onChange}
         required={required}
-        className="h-12 w-full rounded-lg border border-white/10 bg-white/[0.045] px-4 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[#d9f45a]/60 focus:bg-white/[0.065] focus:ring-2 focus:ring-[#d9f45a]/10"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.045] px-4 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[#d9f45a]/60 focus:bg-white/[0.065] focus:ring-2 focus:ring-[#d9f45a]/10"
       />
     </div>
   );
 }
 
-export function SelectField({ id, label, placeholder, options }) {
+export function SelectField({
+  id,
+  label,
+  placeholder,
+  options,
+  value,
+  onChange,
+  required = false,
+}) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-slate-200">
+      <label
+        htmlFor={id}
+        className="mb-2 block text-sm font-semibold text-slate-200"
+      >
         {label}
       </label>
+
       <select
         id={id}
         name={id}
-        defaultValue=""
-        className="h-12 w-full rounded-lg border border-white/10 bg-[#0c151e] px-4 text-sm text-white outline-none transition focus:border-[#d9f45a]/60 focus:ring-2 focus:ring-[#d9f45a]/10"
+        value={value}
+        onChange={onChange}
+        required={required}
+        className="h-12 w-full rounded-xl border border-white/10 bg-[#0c151e] px-4 text-sm text-white outline-none transition focus:border-[#d9f45a]/60 focus:ring-2 focus:ring-[#d9f45a]/10"
       >
-        <option value="" disabled>{placeholder}</option>
-        {options.map((option) => <option key={option} value={option}>{option}</option>)}
+        <option value="" disabled>
+          {placeholder}
+        </option>
+
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -102,7 +123,7 @@ export function GoogleButton({ label }) {
   return (
     <button
       type="button"
-      className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-white/12 bg-white/[0.035] text-sm font-bold text-white transition hover:border-white/25 hover:bg-white/[0.07]"
+      className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-white/12 bg-white/[0.035] text-sm font-bold text-white transition hover:border-white/25 hover:bg-white/[0.07] active:scale-[0.98]"
     >
       <FcGoogle className="text-xl" />
       {label}

@@ -1,0 +1,102 @@
+/* ============================================================
+   HELP CARD
+   ============================================================ */
+.help-card-wrapper {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.03);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.help-card-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+    border-color: rgba(226, 232, 240, 1);
+}
+
+.help-card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.help-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.help-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+
+.help-card-subtitle {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+}
+
+/* Headphone area */
+.help-card-image-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-card-headphone-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+/* Contact Support button */
+.help-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.help-contact-btn svg {
+    font-size: 17px;
+    color: #7c3aed;
+    flex-shrink: 0;
+}
+
+.help-contact-btn:hover {
+    background: #f8fafc;
+    border-color: #c4b5fd;
+}
+
+.help-contact-btn:focus-visible {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .help-card-wrapper {
+        padding: 18px;
+    }
+}
