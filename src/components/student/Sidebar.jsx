@@ -14,47 +14,14 @@ import { logout } from "../../services/auth";
 import { useAuth } from "../../context/AuthContext";
 
 const menuItems = [
-  {
-    title: "Dashboard",
-    icon: HiOutlineHome,
-    path: "/student/dashboard",
-  },
-  {
-    title: "Projects",
-    icon: HiOutlineBriefcase,
-    path: "/student/projects",
-  },
-  {
-    title: "Applications",
-    icon: HiOutlineClipboardList,
-    path: "/student/applications",
-  },
-  {
-    title: "Verified Skills",
-    icon: HiOutlineBadgeCheck,
-    path: "/student/skills",
-  },
-  {
-    title: "Certificates",
-    icon: HiOutlineAcademicCap,
-    path: "/student/certificates",
-  },
-  {
-    title: "AI Career Coach",
-    icon: HiOutlineSparkles,
-    path: "/student/ai-coach",
-    badge: "BETA",
-  },
-  {
-    title: "Profile",
-    icon: HiOutlineUser,
-    path: "/student/profile",
-  },
-  {
-    title: "Settings",
-    icon: HiOutlineCog,
-    path: "/student/settings",
-  },
+  { title: "Dashboard", icon: HiOutlineHome, path: "/student/dashboard" },
+  { title: "Projects", icon: HiOutlineBriefcase, path: "/student/projects" },
+  { title: "Applications", icon: HiOutlineClipboardList, path: "/student/applications" },
+  { title: "Verified Skills", icon: HiOutlineBadgeCheck, path: "/student/skills" },
+  { title: "Certificates", icon: HiOutlineAcademicCap, path: "/student/certificates" },
+  { title: "AI Career Coach", icon: HiOutlineSparkles, path: "/student/ai-coach", badge: "BETA" },
+  { title: "Profile", icon: HiOutlineUser, path: "/student/profile" },
+  { title: "Settings", icon: HiOutlineCog, path: "/student/settings" },
 ];
 
 function Sidebar() {
@@ -71,79 +38,50 @@ function Sidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 hidden md:flex h-screen w-[245px] flex-col border-r border-slate-200 bg-white">
+    <aside className="fixed left-0 top-0 hidden md:flex h-screen w-[260px] flex-col border-r border-slate-200/60 bg-white">
 
       {/* Logo */}
-
-      <div className="flex h-20 items-center border-b border-slate-100 px-6">
-
-        <div className="relative h-10 w-10">
-
-          <span className="absolute left-4 top-0 h-10 w-[5px] rotate-45 rounded-full bg-violet-700"></span>
-
-          <span className="absolute left-4 top-0 h-10 w-[5px] -rotate-45 rounded-full bg-violet-500"></span>
-
+      <div className="flex h-[88px] shrink-0 items-center px-6">
+        <div className="relative h-8 w-8">
+          <div className="absolute left-3 top-0 h-8 w-[4px] rotate-45 rounded-full bg-violet-600 shadow-[0_2px_8px_-2px_rgba(124,58,237,0.5)]"></div>
+          <div className="absolute left-3 top-0 h-8 w-[4px] -rotate-45 rounded-full bg-violet-400 shadow-sm"></div>
         </div>
-
         <div className="ml-3">
-
-          <h1 className="text-[22px] font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-xl font-black tracking-tight text-slate-900">
             Xpera
           </h1>
-
-          <p className="text-xs text-slate-500">
-            Student Workspace
-          </p>
-
         </div>
-
       </div>
 
       {/* Navigation */}
-
-      <nav className="flex-1 overflow-y-auto px-5 py-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-
-        <div className="space-y-2">
+      <nav className="flex-1 overflow-y-auto px-4 py-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="space-y-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
-
             return (
               <NavLink
                 key={item.title}
                 to={item.path}
                 className={({ isActive }) =>
-                  `group flex items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-200 ${isActive
-                    ? "bg-violet-50 text-violet-700"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                  `group flex items-center justify-between rounded-[12px] px-3 py-2.5 transition-all duration-200 ease-out ${isActive
+                    ? "bg-violet-50/80 text-violet-700 font-bold"
+                    : "text-slate-500 font-semibold hover:bg-slate-50 hover:text-slate-900"
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <div className="flex items-center gap-4">
-
-                      <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${isActive
-                          ? "bg-violet-100"
-                          : "bg-transparent group-hover:bg-slate-100"
+                    <div className="flex items-center gap-3.5">
+                      <Icon
+                        className={`text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 ${isActive ? "text-violet-600" : "text-slate-400 group-hover:text-slate-500"
                           }`}
-                      >
-                        <Icon
-                          className={`text-[20px] ${isActive
-                            ? "text-violet-700"
-                            : "text-slate-500"
-                            }`}
-                        />
-                      </div>
-
-                      <span className="text-[15px] font-semibold">
+                      />
+                      <span className="text-[14px]">
                         {item.title}
                       </span>
-
                     </div>
-
                     {item.badge && (
-                      <span className="rounded-full bg-violet-100 px-2 py-1 text-[10px] font-bold tracking-wide text-violet-700">
+                      <span className="rounded-[6px] bg-violet-100 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-violet-600">
                         {item.badge}
                       </span>
                     )}
@@ -152,121 +90,73 @@ function Sidebar() {
               </NavLink>
             );
           })}
+        </div>
 
-
-          {/* Progress Card */}
-
-          <div className="mt-8 rounded-3xl border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-white p-4">
-
-            <div className="flex items-center justify-between">
-
-              <div>
-
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-600">
-                  Level
-                </p>
-
-                <h3 className="mt-2 text-2xl font-extrabold text-slate-900">
-                  Builder
-                </h3>
-
-              </div>
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600 text-white">
-
-                <HiOutlineSparkles className="text-2xl" />
-
-              </div>
-
+        {/* Progress Card */}
+        <div className="mx-2 mt-8 rounded-[20px] bg-slate-900 p-5 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.4)] relative overflow-hidden">
+          <div className="absolute right-0 top-0 -mr-6 -mt-6 h-24 w-24 rounded-full bg-violet-500/20 blur-xl"></div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-violet-300">
+                Level
+              </p>
+              <h3 className="mt-1 text-[17px] font-extrabold tracking-tight text-white">
+                Builder
+              </h3>
             </div>
-
-            <p className="mt-4 text-sm leading-6 text-slate-500">
-              Complete
-              <span className="font-semibold text-violet-700">
-                {" "}2 more projects{" "}
-              </span>
-              to unlock the
-              <span className="font-semibold">
-                {" "}Professional
-              </span>
-              badge.
-            </p>
-
-            <div className="mt-5">
-
-              <div className="mb-2 flex items-center justify-between">
-
-                <span className="text-xs font-medium text-slate-500">
-                  Progress
-                </span>
-
-                <span className="text-xs font-bold text-violet-700">
-                  68%
-                </span>
-
-              </div>
-
-              <div className="h-2 overflow-hidden rounded-full bg-violet-100">
-
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-violet-700 to-fuchsia-500"
-                  style={{ width: "68%" }}
-                />
-
-              </div>
-
+            <div className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-violet-500/20 text-violet-300 ring-1 ring-inset ring-violet-500/30">
+              <HiOutlineSparkles className="text-[20px]" />
             </div>
-
+          </div>
+          <div className="relative z-10 mt-6">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                Progress
+              </span>
+              <span className="text-[10px] font-bold text-white">
+                68%
+              </span>
+            </div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-slate-800 ring-1 ring-inset ring-white/5">
+              <div
+                className="h-full rounded-full bg-violet-500 transition-all duration-1000 ease-out shadow-[0_0_12px_rgba(139,92,246,0.6)]"
+                style={{ width: "68%" }}
+              />
+            </div>
           </div>
         </div>
       </nav>
+
       {/* Footer */}
-
-      <div className="shrink-0 border-t border-slate-100 p-4">
-
-        <div className="rounded-3xl bg-slate-50 p-4">
-
+      <div className="shrink-0 p-4 border-t border-slate-100/60 pb-6">
+        <div className="rounded-[16px] bg-slate-50 border border-slate-200/50 p-3 shadow-sm transition-all duration-300 hover:border-slate-300/60 hover:shadow-md">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-100 text-lg font-bold text-violet-700">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-violet-500 to-fuchsia-500 text-[11px] font-extrabold tracking-wide text-white shadow-[0_2px_8px_-2px_rgba(139,92,246,0.5)]">
               {profile?.full_name ? profile.full_name.substring(0, 2).toUpperCase() : "ST"}
             </div>
-
-            <div>
-              <h4 className="text-[15px] font-bold text-slate-900">
+            <div className="min-w-0 flex-1">
+              <h4 className="truncate text-[14px] font-bold text-slate-900 leading-tight">
                 {profile?.full_name || "Student"}
               </h4>
-              <p className="mt-1 text-xs text-slate-500">
-                Level 3 • Builder
+              <p className="truncate text-[11px] font-semibold text-slate-500 mt-0.5">
+                Premium Plan
               </p>
             </div>
           </div>
-
-          <div className="mt-4 rounded-2xl bg-white p-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-500">
-                XP Earned
-              </span>
-              <span className="text-sm font-bold text-violet-700">
-                340 XP
-              </span>
-            </div>
-          </div>
-
         </div>
 
-        <button onClick={handleLogout} className="mt-3 flex w-full items-center gap-4 rounded-2xl px-4 py-2.5 text-slate-600 transition-all duration-200 hover:bg-red-50 hover:text-red-600">
-
-          <HiOutlineLogout className="text-[20px]" />
-
-          <span className="font-semibold">
-            Logout
+        <button
+          onClick={handleLogout}
+          className="mt-3 flex w-full items-center gap-3 rounded-[12px] px-3 py-2 text-slate-500 transition-all duration-200 ease-out hover:bg-red-50 hover:text-red-600 group focus:outline-none"
+        >
+          <HiOutlineLogout className="text-[18px] group-hover:text-red-500 transition-colors" />
+          <span className="text-[13px] font-bold">
+            Log out
           </span>
-
         </button>
+      </div>
 
-      </div >
-
-    </aside >
+    </aside>
   );
 }
 

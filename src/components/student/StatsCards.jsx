@@ -3,8 +3,8 @@ import {
   HiOutlineBadgeCheck,
   HiOutlineClipboardCheck,
   HiOutlineStar,
-  HiOutlineTrendingUp,
 } from "react-icons/hi";
+import { HiArrowUpRight } from "react-icons/hi2";
 
 const stats = [
   {
@@ -13,8 +13,7 @@ const stats = [
     subtitle: "Builder",
     trend: "+1 this month",
     icon: HiOutlineBadgeCheck,
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-700",
+    iconBg: "bg-violet-50 text-violet-600",
   },
   {
     title: "XP Earned",
@@ -22,8 +21,7 @@ const stats = [
     subtitle: "160 XP to Level 4",
     progress: 68,
     icon: HiOutlineSparkles,
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-700",
+    iconBg: "bg-violet-50 text-violet-600",
   },
   {
     title: "Projects",
@@ -31,8 +29,7 @@ const stats = [
     subtitle: "Completed",
     trend: "+3 this month",
     icon: HiOutlineClipboardCheck,
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
+    iconBg: "bg-emerald-50 text-emerald-600",
   },
   {
     title: "Verified Skills",
@@ -40,97 +37,71 @@ const stats = [
     subtitle: "Frontend",
     trend: "+2 new",
     icon: HiOutlineStar,
-    iconBg: "bg-amber-100",
-    iconColor: "text-amber-600",
+    iconBg: "bg-amber-50 text-amber-500",
   },
 ];
 
 function StatsCards() {
   return (
-    <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-
+    <section className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 xl:grid-cols-4">
       {stats.map((item) => {
-
         const Icon = item.icon;
-
         return (
-
           <div
             key={item.title}
-            className="flex flex-col h-full rounded-[24px] border border-slate-200/50 bg-white p-6 xl:p-7 shadow-[0_4px_24px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(15,23,42,0.08)] hover:border-slate-200">
-
-            <div className="flex items-start justify-between">
-
-              <div>
-
-                <p className="text-sm font-medium text-slate-500">
+            className="group flex flex-col justify-between rounded-[24px] border border-slate-200/80 bg-white p-6 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-slate-300/80 hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.04)] min-h-[178px]"
+          >
+            <div>
+              <div className="flex items-start justify-between">
+                <p className="text-[13px] font-semibold text-slate-500 transition-colors group-hover:text-slate-700">
                   {item.title}
                 </p>
+                <div
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover:scale-110 ${item.iconBg}`}
+                >
+                  <Icon className="text-[20px]" />
+                </div>
+              </div>
 
-                <h2 className="mt-4 text-3xl xl:text-[34px] font-extrabold tracking-tight text-slate-900">
+              <div className="mt-3">
+                <h2 className="text-3xl font-bold tracking-tight text-slate-900 leading-none">
                   {item.value}
                 </h2>
-
-                <p className="mt-2 text-sm text-slate-500">
+                <p className="mt-2 text-[13px] font-medium text-slate-500">
                   {item.subtitle}
                 </p>
-
               </div>
-
-              <div
-                className={`flex h-14 w-14 items-center justify-center rounded-2xl ${item.iconBg}`}
-              >
-                <Icon className={`text-2xl ${item.iconColor}`} />
-              </div>
-
             </div>
-            {item.progress && (
-              <div className="mt-auto pt-7">
 
-                <div className="mb-2 flex items-center justify-between">
-
-                  <span className="text-xs font-medium text-slate-500">
-                    Progress
-                  </span>
-
-                  <span className="text-xs font-bold text-violet-700">
-                    {item.progress}%
-                  </span>
-
+            <div className="mt-8">
+              {item.progress ? (
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                      Progress
+                    </span>
+                    <span className="text-[11px] font-bold text-violet-600">
+                      {item.progress}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-100/80">
+                    <div
+                      className="h-full rounded-full bg-violet-600 shadow-[0_0_8px_rgba(124,58,237,0.4)] transition-all duration-1000 ease-out"
+                      style={{ width: `${item.progress}%` }}
+                    />
+                  </div>
                 </div>
-
-                <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500"
-                    style={{
-                      width: `${item.progress}%`,
-                    }}
-                  />
-
+              ) : (
+                <div className="flex items-center gap-1 text-emerald-600">
+                  <HiArrowUpRight className="text-sm stroke-[3]" />
+                  <span className="text-[13px] font-semibold tracking-wide">
+                    {item.trend}
+                  </span>
                 </div>
-
-              </div>
-
-            )}
-
-            {!item.progress && (
-              <div className="mt-auto pt-7 flex items-center gap-2">
-
-                <HiOutlineTrendingUp className="text-green-600" />
-
-                <span className="text-sm font-semibold text-green-600">
-                  {item.trend}
-                </span>
-
-              </div>
-
-            )}
-
+              )}
+            </div>
           </div>
-
         );
-
       })}
     </section>
   );

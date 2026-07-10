@@ -23,7 +23,6 @@ function Topbar() {
     setExtractResult(null);
 
     try {
-      // Convert to Base64 wrapped in a proper Promise
       const dataUrl = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -49,7 +48,6 @@ function Topbar() {
           parsed = JSON.parse(res);
         }
       } catch (err) {
-        // Fallback if AI fails to return JSON
         parsed = { candidate: "Unknown", skills: [], strengths: [], weaknesses: [], learning_suggestions: [], recommended_projects: [], score: 0, raw: res };
       }
       setExtractResult(parsed);
@@ -58,7 +56,6 @@ function Topbar() {
       setExtractResult({ error: `Analysis Failed: ${error.message}` });
     } finally {
       setAnalyzing(false);
-      // Reset input so the same file can be selected again
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
@@ -66,158 +63,164 @@ function Topbar() {
   };
 
   return (
-    <header className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
-
-      {/* Left */}
-
-      <div>
-
-        <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-violet-700">
-          Dashboard
-        </span>
-
-        <h1 className="mt-3 text-[34px] font-extrabold tracking-tight text-slate-900">
-          Welcome back{profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""} 👋
-        </h1>
-
-        <p className="mt-2 max-w-xl text-[15px] leading-7 text-slate-500">
-          Continue building your real-world experience and unlock your next
-          career milestone.
-        </p>
-
-      </div>
-
-      {/* Right */}
-
-      <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center xl:w-auto">
-
-        {/* Search */}
-
-        <div className="relative">
-
-          <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-slate-400" />
-
+    <header className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between -mt-2">
+      {/* Search - Left aligned on desktop */}
+      <div className="flex-1 w-full xl:w-auto xl:max-w-md">
+        <div className="relative group">
+          <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-slate-400 transition-colors group-focus-within:text-violet-600" />
           <input
             type="text"
             placeholder="Search projects, skills..."
-            className="h-12 w-full sm:w-[320px] xl:w-[420px] rounded-2xl border border-slate-200 bg-white pl-12 pr-4 text-[15px] text-slate-900 outline-none transition-all duration-200 focus:border-violet-500 focus:ring-4 focus:ring-violet-100"
+            className="h-[46px] w-full rounded-[14px] border border-slate-200/60 bg-white shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)] pl-11 pr-4 text-[14px] font-semibold text-slate-900 placeholder-slate-400 outline-none transition-all duration-300 ease-out focus:border-violet-300 focus:ring-4 focus:ring-violet-500/10 hover:border-slate-300 hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.05)]"
           />
-
         </div>
+      </div>
+
+      {/* Right - Profile and actions */}
+      <div className="flex w-full flex-row items-center justify-end gap-3.5 xl:w-auto">
+
         {/* Notifications */}
-
-        <button className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white transition-all duration-200 hover:bg-slate-50">
-
-          <HiOutlineBell className="text-[22px] text-slate-700" />
-
-          <span className="absolute right-3 top-3 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white"></span>
-
+        <button className="relative flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[14px] bg-white border border-slate-200/60 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.05)] focus:outline-none">
+          <HiOutlineBell className="text-[20px] text-slate-500 transition-colors hover:text-slate-700" />
+          <span className="absolute right-3.5 top-3.5 h-2 w-2 rounded-full bg-rose-500 ring-[3px] ring-white shadow-sm"></span>
         </button>
 
         {/* Resume Upload */}
         <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleFileUpload} />
         <button
           onClick={() => fileInputRef.current?.click()}
-          title="Upload Resume (Image)"
           disabled={analyzing}
-          className="relative flex h-12 items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 transition-all duration-200 hover:bg-slate-50 font-semibold text-slate-700 text-[14px]">
-          <HiOutlineDocumentText className="text-[20px]" />
-          {analyzing ? "Analyzing..." : "Upload Resume"}
+          className="flex h-[46px] items-center justify-center gap-2 rounded-[14px] bg-violet-600 px-5 text-[14px] font-bold text-white shadow-[0_2px_10px_-2px_rgba(124,58,237,0.4)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-violet-700 hover:shadow-[0_6px_16px_-2px_rgba(124,58,237,0.5)] disabled:opacity-70 disabled:cursor-wait focus:outline-none"
+        >
+          {analyzing ? (
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white px-2" />
+          ) : (
+            <HiOutlineDocumentText className="text-[20px]" />
+          )}
+          <span>{analyzing ? "Analyzing..." : "Upload Resume"}</span>
         </button>
 
         {/* User */}
-
-        <button className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-2 transition-all duration-200 hover:bg-slate-50">
-
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-100 text-lg font-bold text-violet-700">
-            {profile?.full_name ? profile.full_name.substring(0, 2).toUpperCase() : "ST"}
+        <button className="group flex h-[46px] items-center gap-3 rounded-[14px] bg-white px-3 py-2 border border-slate-200/60 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.05)] focus:outline-none">
+          <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[10px] bg-violet-100 text-[11px] font-extrabold text-violet-700">
+            {profile?.full_name ? profile.full_name.substring(0, 2).toUpperCase() : "PR"}
           </div>
-
-          <div className="text-left">
-
-            <h3 className="text-[15px] font-bold text-slate-900">
-              {profile?.full_name || "Student"}
+          <div className="text-left hidden sm:block">
+            <h3 className="text-[13px] font-bold text-slate-900 leading-tight">
+              {profile?.full_name || "Priti"}
             </h3>
-
-            <p className="text-xs text-slate-500">
+            <p className="mt-0.5 text-[10px] font-semibold tracking-wide text-slate-400 leading-none">
               Level 3 • Builder
             </p>
-
           </div>
-
-          <HiOutlineChevronDown className="text-slate-500" />
-
+          <HiOutlineChevronDown className="text-sm text-slate-400 ml-1 transition-transform group-hover:text-slate-600" />
         </button>
 
       </div>
 
       {/* Resume Analysis Output Modal */}
       {extractResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-          <div className="flex max-h-[85vh] w-full max-w-[550px] flex-col rounded-[24px] border border-slate-200/50 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.1)] animate-in zoom-in-95 duration-200 overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-100 p-5">
-              <h3 className="text-lg font-bold text-slate-800">Resume Analysis Complete</h3>
-              <button onClick={() => setExtractResult(null)} className="h-8 w-8 flex items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">✕</button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-md p-4">
+          <div className="flex max-h-[85vh] w-full max-w-[550px] flex-col rounded-[24px] bg-white shadow-2xl overflow-hidden ring-1 ring-slate-100">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-inset ring-indigo-500/20">
+                  <HiOutlineDocumentText className="text-xl" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 tracking-tight">AI Analysis Complete</h3>
+                  <p className="text-xs font-medium text-slate-500">CV Evaluation Report</p>
+                </div>
+              </div>
+              <button onClick={() => setExtractResult(null)} className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">✕</button>
             </div>
-            <div className="overflow-y-auto px-6 py-5 text-[14.5px] leading-relaxed text-slate-600 bg-slate-50/50">
+
+            <div className="overflow-y-auto px-6 py-6 text-[14.5px] leading-relaxed text-slate-600 bg-slate-50">
               {extractResult.error ? (
-                <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">
-                  {extractResult.error}
+                <div className="rounded-xl border border-red-200 bg-white p-5 text-red-700 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">⚠️</span>
+                    <p className="font-semibold">{extractResult.error}</p>
+                  </div>
                 </div>
               ) : extractResult.raw ? (
-                <div className="whitespace-pre-wrap">{extractResult.raw}</div>
+                <div className="whitespace-pre-wrap rounded-xl bg-white p-5 shadow-sm ring-1 ring-inset ring-slate-100">{extractResult.raw}</div>
               ) : (
                 <div className="space-y-6">
-
-                  <div className="flex items-center justify-between border border-slate-200/60 bg-white rounded-xl p-4 shadow-sm">
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Candidate</p>
-                      <h4 className="text-lg font-bold text-slate-900">{extractResult.candidate || "No Name Found"}</h4>
+                  {/* Candidate Score Card */}
+                  <div className="flex items-center justify-between rounded-xl bg-white p-5 shadow-sm ring-1 ring-inset ring-slate-100 relative overflow-hidden">
+                    <div className="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-indigo-500/5 blur-xl"></div>
+                    <div className="relative z-10">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1.5">Candidate Details</p>
+                      <h4 className="text-xl font-extrabold text-slate-900">{extractResult.candidate || "Unknown Candidate"}</h4>
                     </div>
-                    <div className="text-right">
-                      <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Score</p>
-                      <div className="flex items-end gap-1">
-                        <span className="text-3xl font-black text-violet-600 leading-none">{extractResult.score || "--"}</span>
-                        <span className="text-sm font-semibold text-slate-400 pb-1">/100</span>
+                    <div className="relative z-10 flex flex-col items-end">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1.5">Overall Score</p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-3xl font-black text-indigo-600 tabular-nums tracking-tighter">{extractResult.score || "--"}</span>
+                        <span className="text-sm font-bold text-slate-400">/100</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="rounded-xl border border-slate-200/60 bg-white p-4 shadow-sm">
-                      <h5 className="font-bold text-slate-800 mb-3 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500"></span>Strengths</h5>
-                      <ul className="space-y-2 text-sm text-slate-600">
-                        {extractResult.strengths?.length > 0 ? extractResult.strengths.slice(0, 3).map((s, i) => <li key={i} className="leading-snug flex items-start gap-2"><span className="text-green-500 mt-0.5">✓</span> <span>{s}</span></li>) : <li>No specific strengths found.</li>}
+                    <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-inset ring-slate-100">
+                      <h5 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 ring-1 ring-inset ring-emerald-500/20 text-xs">💪</span>
+                        Strengths
+                      </h5>
+                      <ul className="space-y-3 lg:space-y-2 text-sm text-slate-600">
+                        {extractResult.strengths?.length > 0 ? extractResult.strengths.slice(0, 3).map((s, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"></span>
+                            <span className="leading-snug font-medium text-slate-700">{s}</span>
+                          </li>
+                        )) : <li>No specific strengths found.</li>}
                       </ul>
                     </div>
-                    <div className="rounded-xl border border-slate-200/60 bg-white p-4 shadow-sm">
-                      <h5 className="font-bold text-slate-800 mb-3 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-orange-400"></span>Areas to Grow</h5>
-                      <ul className="space-y-2 text-sm text-slate-600">
-                        {extractResult.weaknesses?.length > 0 ? extractResult.weaknesses.slice(0, 3).map((w, i) => <li key={i} className="leading-snug text-slate-500">&bull; {w}</li>) : <li>No specific areas found.</li>}
+                    <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-inset ring-slate-100">
+                      <h5 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-50 text-amber-600 ring-1 ring-inset ring-amber-500/20 text-xs">📉</span>
+                        Areas to Grow
+                      </h5>
+                      <ul className="space-y-3 lg:space-y-2 text-sm text-slate-600">
+                        {extractResult.weaknesses?.length > 0 ? extractResult.weaknesses.slice(0, 3).map((w, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+                            <span className="leading-snug font-medium text-slate-700">{w}</span>
+                          </li>
+                        )) : <li>No specific areas found.</li>}
                       </ul>
                     </div>
                   </div>
 
                   <div>
-                    <h5 className="font-bold text-slate-800 mb-3 text-[13px] uppercase tracking-wider">Identified Skills</h5>
+                    <h5 className="font-bold text-slate-900 mb-3 text-xs uppercase tracking-widest pl-1">Identified Skills</h5>
                     <div className="flex flex-wrap gap-2">
                       {extractResult.skills?.length > 0 ? extractResult.skills.map((skill, i) => (
-                        <span key={i} className="px-3 py-1 bg-violet-50 text-violet-700 font-semibold rounded-lg text-xs border border-violet-100">{skill}</span>
-                      )) : <span className="text-sm text-slate-500">No skills mapped.</span>}
+                        <span key={i} className="rounded-lg bg-indigo-50 px-3 py-1.5 text-xs font-bold text-indigo-700 ring-1 ring-inset ring-indigo-500/20 transition-all hover:bg-indigo-100">
+                          {skill}
+                        </span>
+                      )) : <span className="text-sm text-slate-500 pl-1">No skills mapped.</span>}
                     </div>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5 rounded-xl bg-white p-5 shadow-sm ring-1 ring-inset ring-slate-100">
                     <div>
-                      <h5 className="font-bold text-slate-800 mb-2 text-[13px] uppercase tracking-wider">Learning Suggestions</h5>
-                      <ul className="space-y-1.5 text-sm">
-                        {extractResult.learning_suggestions?.length > 0 ? extractResult.learning_suggestions.map((l, i) => <li key={i} className="flex items-start gap-2"><span className="text-violet-500 mt-1 text-xs">◆</span> <span className="leading-relaxed">{l}</span></li>) : <li className="text-slate-500">N/A</li>}
+                      <h5 className="font-bold text-slate-900 mb-3 text-xs uppercase tracking-widest text-indigo-600">Learning Suggestions</h5>
+                      <ul className="space-y-2.5 text-sm">
+                        {extractResult.learning_suggestions?.length > 0 ? extractResult.learning_suggestions.map((l, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[10px] text-slate-500">{i + 1}</span>
+                            <span className="leading-relaxed font-medium text-slate-700">{l}</span>
+                          </li>
+                        )) : <li className="text-slate-500">N/A</li>}
                       </ul>
                     </div>
-                    <div>
-                      <h5 className="font-bold text-slate-800 mb-2 text-[13px] uppercase tracking-wider">Recommended Next Project</h5>
-                      <div className="rounded-xl border border-slate-200/60 bg-white p-4 shadow-sm border-l-4 border-l-violet-500">
-                        <p className="font-semibold text-slate-800 text-sm">{extractResult.recommended_projects?.[0] || "Continue building web apps using React."}</p>
+                    <div className="pt-4 border-t border-slate-100">
+                      <h5 className="font-bold text-slate-900 mb-3 text-xs uppercase tracking-widest text-emerald-600">Recommended Next Project</h5>
+                      <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
+                        <p className="font-bold text-emerald-900 text-sm">{extractResult.recommended_projects?.[0] || "Continue building web apps using React."}</p>
                       </div>
                     </div>
                   </div>
@@ -225,13 +228,12 @@ function Topbar() {
                 </div>
               )}
             </div>
-            <div className="p-5 border-t border-slate-100 bg-slate-50 flex justify-end">
-              <Button onClick={() => setExtractResult(null)} variant="violet">Done</Button>
+            <div className="bg-white border-t border-slate-100 p-5 flex justify-end">
+              <Button onClick={() => setExtractResult(null)} className="bg-indigo-600 text-white font-bold tracking-wide hover:bg-indigo-700 px-6">Done</Button>
             </div>
           </div>
         </div>
       )}
-
     </header>
   );
 }
