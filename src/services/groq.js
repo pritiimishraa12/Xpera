@@ -13,7 +13,7 @@ export async function chatWithAI(messages, systemPrompt = "You are a helpful AI 
     }
 
     const payload = {
-        model: "llama-3.3-70b-versatile", // Powerful active model for general conversational tasks
+        model: "openai/gpt-oss-120b", // Powerful active model for general conversational tasks
         messages: [
             { role: "system", content: systemPrompt },
             ...messages
@@ -37,7 +37,7 @@ export async function chatWithAI(messages, systemPrompt = "You are a helpful AI 
     }
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    return data?.choices?.[0]?.message?.content || "No response received from AI.";
 }
 
 /**
@@ -50,7 +50,7 @@ export async function analyzeDocumentVision(dataUrl, prompt = "Analyze this docu
     }
 
     const payload = {
-        model: "meta-llama/llama-4-scout-17b-16e-instruct", // Currently supported Groq Vision multimodal model
+        model: "qwen/qwen3.8-27b", // Supported Groq Vision multimodal model
         messages: [
             {
                 role: "user",
@@ -84,5 +84,5 @@ export async function analyzeDocumentVision(dataUrl, prompt = "Analyze this docu
     }
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    return data?.choices?.[0]?.message?.content || "{}";
 }
